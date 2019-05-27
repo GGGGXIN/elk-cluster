@@ -12,9 +12,77 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
+    container_name: elasticsearch
     environment:
+      cluster.name: elastic-pro
+      node.name: node_master
+      node.master: "true" 
+      node.data: "true"
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       ELASTIC_PASSWORD: changeme
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    networks:
+      - elk
+
+  elasticsearch2:
+    build:
+      context: elasticsearch2/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./elasticsearch2/config/elasticsearch.yml:/usr/share/elasticsearch2/config/elasticsearch.yml:ro  
+    ports:
+      - "9202:9200"
+      - "9302:9300"
+    container_name: elasticsearch2
+    environment:
+      cluster.name: elastic-pro
+      node.name: node2
+      node.master: "false"
+      node.data: "true"
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: changeme
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    networks:
+      - elk 
+
+  elasticsearch3:
+    build:
+      context: elasticsearch3/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./elasticsearch3/config/elasticsearch.yml:/usr/share/elasticsearch3/config/elasticsearch.yml:ro
+    ports:
+      - "9203:9200"
+      - "9303:9300"
+    container_name: elasticsearch3
+    environment:
+      cluster.name: elastic-pro
+      node.name: node3
+      node.master: "false"
+      node.data: "true"
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: changeme
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
     networks:
       - elk
 

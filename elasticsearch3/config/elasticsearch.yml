@@ -9,7 +9,9 @@ network.host: 0.0.0.0
 ## see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
 #
 #discovery.type: single-node
-
+discovery.zen.ping.unicast.hosts: ["0.0.0.0", "0.0.0.0", "0.0.0.0"]
+discovery.zen.minimum_master_nodes: 1
+discovery.zen.ping_timeout: 5s
 ## X-Pack settings
 ## see https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-xpack.html
 #

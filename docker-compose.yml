@@ -15,7 +15,7 @@ services:
     container_name: elasticsearch
     environment:
       cluster.name: elastic-pro
-      node.name: node_master
+      node.name: es
       node.master: "true" 
       node.data: "true"
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
@@ -43,7 +43,7 @@ services:
     container_name: elasticsearch2
     environment:
       cluster.name: elastic-pro
-      node.name: node2
+      node.name: es2
       node.master: "false"
       node.data: "true"
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
@@ -71,7 +71,7 @@ services:
     container_name: elasticsearch3
     environment:
       cluster.name: elastic-pro
-      node.name: node3
+      node.name: es3
       node.master: "false"
       node.data: "true"
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
